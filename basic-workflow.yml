@@ -1,0 +1,21 @@
+# Базовый workflow: ручной запуск и shell-команды
+name: Basic Workflow
+
+# Ручной запуск кнопкой Run workflow во вкладке Actions
+on: workflow_dispatch
+
+jobs:
+  greeting-job:
+    runs-on: ubuntu-latest
+    steps:
+      # Шаг 1: одиночное сообщение
+      - name: Print greeting
+        run: echo "Hello, GitHub Actions!"
+
+      # Шаг 2: многострочный вывод через оператор |
+      - name: Print service info
+        run: |
+          echo "Repository: ${{ github.repository }}"
+          echo "Actor: ${{ github.actor }}"
+          echo "Runner OS: ${{ runner.os }}"
+          date

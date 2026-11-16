@@ -1,0 +1,29 @@
+# CI с фильтрацией по ветке и путям
+name: CI Filter
+
+on:
+  push:
+    branches: [main]            # только пуш в main
+    paths:
+      - 'src/**'                # изменения в папке src
+      - 'package.json'          # или в package.json
+
+jobs:
+  check-env:
+    runs-on: ubuntu-latest
+    steps:
+      # Клонирование репозитория
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Установка Node.js 20
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # Проверка версий
+      - name: Check versions
+        run: |
+          node -v
+          npm -v
